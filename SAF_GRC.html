@@ -1,0 +1,1186 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projets GRC - SAF FJKM</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #f8f9fa;
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+            background: white;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+            font-weight: bold;
+            color: #1e3c72;
+        }
+
+        .nav-title h1 {
+            font-size: 1.8em;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .nav-subtitle {
+            font-size: 0.95em;
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 30px;
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px;
+            border-radius: 20px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+        }
+
+        .hero-title {
+            font-size: 3em;
+            font-weight: 800;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .hero-description {
+            font-size: 1.3em;
+            opacity: 0.95;
+            line-height: 1.6;
+            max-width: 800px;
+        }
+
+        .stats-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 35px;
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            border-left: 5px solid #667eea;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        }
+
+        .stat-icon {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+        }
+
+        .stat-number {
+            font-size: 3em;
+            font-weight: 800;
+            color: #1e3c72;
+            line-height: 1;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 1.1em;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .filters-section {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            margin-bottom: 40px;
+        }
+
+        .filters-title {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: #1e3c72;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .filter-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 20px;
+        }
+
+        .filter-item {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .filter-label {
+            font-weight: 600;
+            color: #555;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .filter-grid input,
+        .filter-grid select {
+            padding: 14px 18px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1em;
+            transition: all 0.3s;
+            background: #f8f9fa;
+        }
+
+        .filter-grid input:focus,
+        .filter-grid select:focus {
+            outline: none;
+            border-color: #667eea;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .projects-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .projects-count {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: #1e3c72;
+        }
+
+        .view-toggle {
+            display: flex;
+            gap: 10px;
+            background: white;
+            padding: 8px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+
+        .view-btn {
+            padding: 10px 20px;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .view-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+            border-color: #667eea;
+        }
+
+        .project-header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+        }
+
+        .project-number {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: rgba(255,255,255,0.2);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.9em;
+        }
+
+        .project-title {
+            font-size: 1.4em;
+            font-weight: 700;
+            margin-bottom: 12px;
+            line-height: 1.4;
+            position: relative;
+        }
+
+        .project-duration {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.95em;
+            opacity: 0.95;
+            background: rgba(255,255,255,0.15);
+            padding: 8px 14px;
+            border-radius: 8px;
+            display: inline-block;
+        }
+
+        .project-body {
+            padding: 30px;
+        }
+
+        .project-description {
+            color: #555;
+            line-height: 1.7;
+            margin-bottom: 25px;
+            font-size: 1.05em;
+        }
+
+        .project-meta {
+            display: grid;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: start;
+            gap: 12px;
+        }
+
+        .meta-icon {
+            font-size: 1.3em;
+            margin-top: 2px;
+        }
+
+        .meta-content {
+            flex: 1;
+        }
+
+        .meta-label {
+            font-weight: 700;
+            color: #1e3c72;
+            font-size: 0.85em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 5px;
+        }
+
+        .meta-value {
+            color: #333;
+            font-size: 1em;
+            line-height: 1.5;
+        }
+
+        .tag {
+            display: inline-block;
+            background: linear-gradient(135deg, #e8eaf6 0%, #f3e5f5 100%);
+            color: #5e35b1;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin: 3px;
+        }
+
+        .btn-details {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.05em;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-details:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.75);
+            z-index: 1000;
+            overflow-y: auto;
+            padding: 20px;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: white;
+            max-width: 1000px;
+            margin: 40px auto;
+            border-radius: 24px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            animation: modalSlideIn 0.4s ease;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 50px;
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 25px;
+            right: 30px;
+            width: 45px;
+            height: 45px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8em;
+            cursor: pointer;
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+        }
+
+        .close-modal:hover {
+            background: rgba(255,255,255,0.3);
+            transform: rotate(90deg);
+        }
+
+        .modal-title {
+            font-size: 2.2em;
+            font-weight: 800;
+            margin-bottom: 15px;
+            line-height: 1.3;
+        }
+
+        .modal-duration {
+            font-size: 1.1em;
+            opacity: 0.95;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .modal-body {
+            padding: 50px;
+        }
+
+        .detail-section {
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: #1e3c72;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #e8eaf6;
+        }
+
+        .section-icon {
+            font-size: 1.2em;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .info-box {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 12px;
+            border-left: 4px solid #667eea;
+        }
+
+        .info-label {
+            font-weight: 700;
+            color: #1e3c72;
+            font-size: 0.85em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 10px;
+        }
+
+        .info-value {
+            color: #333;
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+
+        .activities-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .activities-list li {
+            background: white;
+            padding: 20px;
+            margin-bottom: 12px;
+            border-radius: 12px;
+            border-left: 4px solid #667eea;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            display: flex;
+            gap: 15px;
+            transition: all 0.3s;
+        }
+
+        .activities-list li:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .activity-bullet {
+            font-size: 1.5em;
+            color: #667eea;
+            flex-shrink: 0;
+        }
+
+        .activity-text {
+            color: #333;
+            line-height: 1.7;
+            font-size: 1.05em;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 80px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .no-results-icon {
+            font-size: 5em;
+            margin-bottom: 20px;
+            opacity: 0.5;
+        }
+
+        .no-results-text {
+            color: #666;
+            font-size: 1.3em;
+        }
+
+        @media (max-width: 968px) {
+            .filter-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-section {
+                padding: 40px 30px;
+            }
+
+            .hero-title {
+                font-size: 2em;
+            }
+
+            .modal-body {
+                padding: 30px;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-content">
+            <div class="logo-section">
+                <div class="logo">🌍</div>
+                <div class="nav-title">
+                    <h1>SAF FJKM</h1>
+                    <div class="nav-subtitle">Service d'Appui et de Formation</div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="hero-section">
+            <h2 class="hero-title">Projets GRC</h2>
+            <p class="hero-description">
+                Gestion des Risques et Catastrophes - Notre engagement pour renforcer la résilience des communautés vulnérables face aux défis climatiques et aux catastrophes naturelles à Madagascar.
+            </p>
+        </div>
+
+        <div class="stats-section">
+            <div class="stat-card">
+                <div class="stat-icon">📊</div>
+                <div class="stat-number" id="totalProjects">15</div>
+                <div class="stat-label">Projets Actifs</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">📍</div>
+                <div class="stat-number" id="totalRegions">8</div>
+                <div class="stat-label">Régions Couvertes</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">💰</div>
+                <div class="stat-number" id="totalBudget">2.3M€</div>
+                <div class="stat-label">Budget Total</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">👥</div>
+                <div class="stat-number">50K+</div>
+                <div class="stat-label">Bénéficiaires</div>
+            </div>
+        </div>
+
+        <div class="filters-section">
+            <div class="filters-title">
+                <span>🔍</span> Filtres de Recherche
+            </div>
+            <div class="filter-grid">
+                <div class="filter-item">
+                    <label class="filter-label">Recherche</label>
+                    <input type="text" id="searchInput" placeholder="Rechercher par titre, description, district...">
+                </div>
+                <div class="filter-item">
+                    <label class="filter-label">Région</label>
+                    <select id="regionFilter">
+                        <option value="">Toutes les régions</option>
+                    </select>
+                </div>
+                <div class="filter-item">
+                    <label class="filter-label">Année</label>
+                    <select id="yearFilter">
+                        <option value="">Toutes les années</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="projects-header">
+            <div class="projects-count">
+                <span id="projectsCount">15</span> Projets trouvés
+            </div>
+        </div>
+
+        <div class="projects-grid" id="projectsGrid"></div>
+    </div>
+
+    <div class="modal" id="projectModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close-modal" onclick="closeModal()">×</span>
+                <h2 class="modal-title" id="modalTitle"></h2>
+                <div class="modal-duration" id="modalDuration"></div>
+            </div>
+            <div class="modal-body" id="modalBody"></div>
+        </div>
+    </div>
+
+    <script>
+        const projects = [
+            {
+                title: "DRA (Dutch Relief Alliance)",
+                description: "Sauver la vie des ménages touchés par la sécheresse dans le district d'Ambovombe par une assistance alimentaire visant à soutenir les moyens de subsistance face à l'insécurité alimentaire. 2.000 ménages soient 12.000 personnes seront touchées.",
+                duration: "Décembre 2021 - Juin 2022",
+                financement: "Tear Fund",
+                montant: "593.038 EUR",
+                region: "ANDROY",
+                district: "Ambovombe",
+                commune: "Commune urbaine d'Ambovombe",
+                activites: [
+                    "Distribution de vivres pour permettre d'assurer les besoins alimentaires fondamentaux",
+                    "Distribution de paquet alimentaire composé de 50Kg de riz, 5Kg d'haricot et de 1 Litres d'huile",
+                    "Dispensation d'une formation en agriculture climato-intelligente, pour renforcer les capacités des bénéficiaires sur les techniques agricoles résilientes aux changements climatiques et aux techniques de préservation de la qualité et fertilité des sols",
+                    "Dotation en semences de légumes pour les cultures"
+                ]
+            },
+            {
+                title: "WAHAFA - Action Anticipatoire Sécheresse",
+                description: "Intervenir à l'avance en fonction des prévisions climatiques avant que les crises n'impactent les communautés déjà vulnérables par rapport à la sécheresse et l'insécurité alimentaire à travers la mise en place d'un mécanisme d'anticipation sécheresse basée sur le SAP.",
+                duration: "5 mois",
+                financement: "WHH (Welthungerhilfe)",
+                montant: "80.000 EUR",
+                region: "Toliara",
+                district: "Toliara, Sakaraha II",
+                commune: "",
+                activites: [
+                    "Renforcement de capacités des parties prenantes sur le concept de l'action anticipatoire",
+                    "Participation active coordination avec le Groupe Technique Action Anticipatoire National",
+                    "Renforcement des capacités et des stratégies sur l'actions anticipatoires à réaliser en cas de déclenchement",
+                    "Analyse et gestion des risques et vulnérabilités dans les districts d'intervention",
+                    "Développement participatif des Plans d'Actions Anticipatoires et réalisation SIMEX",
+                    "Suivi, apprentissage et responsabilisation des acteurs clé ainsi que les parties prenantes",
+                    "Exercice de simulation sécheresse"
+                ]
+            },
+            {
+                title: "Réponse post-Freddy",
+                description: "Contribuer à la prise en charge des besoins humanitaires de la population vulnérable la plus touchée par le cyclone Freddy par le biais d'articles alimentaires et relèvement agricole.",
+                duration: "Mars - Juin 2023",
+                financement: "ACT Alliance",
+                montant: "148.712 USD",
+                region: "Menabe",
+                district: "Manja",
+                commune: "Andranopasy",
+                activites: [
+                    "Distribution des vivres et soutien des communautés affectées par le biais de distribution des semences et une formation technique pour l'amélioration de leur savoir-faire en termes d'agriculture",
+                    "Distribution pour 700 ménages, pendant deux mois de 50kg de riz, 1 litre d'huile végétale et 5kg de haricots",
+                    "Après chaque distribution alimentaire (deux fois), un PDM est effectué",
+                    "Distribution de semences de riz, manioc",
+                    "Distribution petits équipements de plantation",
+                    "Formation en agriculture intelligente"
+                ]
+            },
+            {
+                title: "Réponse post-Cheneso",
+                description: "Contribuer à la prise en charge des besoins aigus et humanitaires de la population vulnérable la plus touchée par l'inondation par le biais d'articles non alimentaires (kits WASH et protection sociale)",
+                duration: "Février - Mars 2023",
+                financement: "Start Network / MEDAIR",
+                montant: "271.371.551 MGA",
+                region: "Menabe",
+                district: "Belo sur Tsiribihina",
+                commune: "",
+                activites: [
+                    "Évaluation de besoins en termes de Protection, Santé Mentale et Support Psychosocial",
+                    "Réunions d'échanges des femmes sur les sujets d'Hygiène menstruelle et les sujets liés à la protection, VBG et WASH",
+                    "Evaluation approfondie WASH",
+                    "Désinfection puits",
+                    "Formation désinfection puits",
+                    "Distribution de kits hygiène menstruelle pour les femmes et les filles des ménages sinistrés",
+                    "Distribution de kits WASH aux ménages cibles",
+                    "Sensibilisation de proximité sur les 04 messages clés WASH",
+                    "Sensibilisation de masse sur la santé, l'hygiène et sur l'environnement",
+                    "Conduite des actions communautaires d'assainissement de l'environnement",
+                    "Renforcement de capacités des équipes locales en protocoles de distribution et protection"
+                ]
+            },
+            {
+                title: "LLGI - Local Leadership for Global Impact",
+                description: "Planification d'urgence contribuant à la résilience des communautés faces aux catastrophes. Renforcement des capacités et des outils nécessaires pour planifier et faciliter l'engagement des communautés dans les plans d'urgence des autorités locales pour renforcer la résilience des communautés face aux catastrophes",
+                duration: "Juillet 2021 - Janvier 2024",
+                financement: "DKH",
+                montant: "76.580 EUR (46.580 EUR Fond BMZ + 30.000 EUR Fond DKH)",
+                region: "Analamanga",
+                district: "Antananarivo Atsimondrano",
+                commune: "Ampanefy",
+                activites: [
+                    "OSC disposant de capacités accrues pour planifier des catastrophes complexes",
+                    "Approches locales de planification des catastrophes testées dans la plupart des communautés à risque",
+                    "Systèmes nationaux et internationaux modifiés pour aider les OSC à se préparer aux catastrophes complexes"
+                ]
+            },
+            {
+                title: "Early Action Cyclone Batsirai",
+                description: "Mener des actions précoces à la suite du passage du cyclone Batsirai en vue d'atténuer les pertes humanitaires dans les zones potentiellement touchées par le cyclone.",
+                duration: "Février 2022 - Extension Avril 2022",
+                financement: "DKH",
+                montant: "5.000 EUR",
+                region: "Analamanga",
+                district: "",
+                commune: "",
+                activites: [
+                    "Dotation d'équipements pour 160 volontaires FJKM réparties au niveau des 16 localités : kits d'urgence et outils de sensibilisation pour leur permettre de secourir les victimes durant le passage du cyclone Batsirai",
+                    "Sensibilisation des communautés des zones à risques, des soutiens psychosociaux des victimes (/premiers soins, ...) par les volontaires avant, durant et après le passage du cyclone",
+                    "Appui par les volontaires des communautés affectées durant leur évacuation vers les sites d'hébergement"
+                ]
+            },
+            {
+                title: "Assistance Victimes Batsirai - Mananjary et Manakara",
+                description: "Répondre aux impacts de Batsirai afin d'assurer un meilleur relèvement des ménages vulnérables dans les Districts de Mananjary et Manakara. Restaurer le niveau de vie et la dignité de la communauté locale affectée par le cyclone. Assurer la qualité de l'intervention humanitaire à travers la réhabilitation des unités SAF/FJKM.",
+                duration: "15 Avril 2022 - 14 Juin 2022",
+                financement: "Hungarian Interchurch Aid (HIA)",
+                montant: "14.987,56 USD",
+                region: "Vatovavy Fitovinany",
+                district: "Manakara, Mananjary",
+                commune: "",
+                activites: [
+                    "Campagne de sensibilisation et d'information",
+                    "Identification des bénéficiaires et des besoins",
+                    "Acquisition et transport des matériels et Kits WASH dans les zones du projet",
+                    "Distribution des kits WASH pour 327 ménages",
+                    "Distribution de cash destinées à l'achat de semences",
+                    "Réhabilitation des bureaux de l'unité de SAF/FJKM à Mananjary",
+                    "Suivi post-distribution",
+                    "Suivi et évaluation"
+                ]
+            },
+            {
+                title: "BHA Fiarenana",
+                description: "Contribuer à la prise en charge des besoins aigus et humanitaires de la population vulnérable la plus touchée dans les régions (Atsimo Antsinanana et/ou Vatovavy et/ou Fitovinany) par le biais d'abris, d'articles non alimentaires et d'une assistance WASH.",
+                duration: "Février - Avril 2022",
+                financement: "CARE",
+                montant: "25.000 EUR",
+                region: "Fitovinany",
+                district: "Manakara, Vohipeno",
+                commune: "",
+                activites: [
+                    "Distribution de kits WASH",
+                    "Distribution de kits hygiène féminin",
+                    "Désinfection de points d'eau inondés par chloration",
+                    "Vidange de latrines inondés au sein d'établissement scolaire",
+                    "Distribution de kits BNA (Biens Non Alimentaires)",
+                    "Réhabilitation d'abris à travers la mobilisation communautaire et l'approche participative",
+                    "Distribution de vivres dans le cadre de l'approche VCT (Vivres Contre Travail)",
+                    "Transfert monétaire dans le cadre de l'approche ACT (Argent Contre Travail)",
+                    "Identification des communes bénéficiaires et des travaux de désenclavement à entreprendre",
+                    "Identification des travaux communautaire à entreprendre au sein des Fokontany",
+                    "Amélioration de la sécurité alimentaire, moyens de subsistance et accès aux services sociaux de base",
+                    "Travaux d'assainissement des villages à travers l'approche HIMO (Haute Intensité de Main d'Oeuvre)"
+                ]
+            },
+            {
+                title: "Vues du Front 2019",
+                description: "Renforcer l'inclusion et la collaboration entre les personnes à risque, la société civile et les gouvernements dans la conception et la mise en œuvre de politiques et de pratiques visant à réduire les risques et à renforcer la résilience",
+                duration: "Janvier 2018 - Août 2022",
+                financement: "Union Européenne / GNDR",
+                montant: "44.944 EUR",
+                region: "Multi-régions",
+                district: "Analamanga, SAVA, Analanjirofo, Atsimo Andrefana, Androy",
+                commune: "Multiples communes",
+                activites: [
+                    "Les capacités des acteurs locaux à s'engager dans des actions de RRC et de résilience sont renforcées",
+                    "L'utilisation des données locales dans les processus de consolidation de la résilience est optimisée",
+                    "L'engagement entre différentes actions dans les processus de renforcement de la résilience est accru",
+                    "Intervention dans la Grande plaine de Tana",
+                    "Intervention dans le Bassin Versant Centre Ouest",
+                    "Intervention dans le Grand Sud",
+                    "Intervention dans le Littoral Nord Est"
+                ]
+            },
+            {
+                title: "DKH DROUGHT - AVANA Androy",
+                description: "Réponse d'urgence à la sécheresse dans le sud de Madagascar - Région Androy. Augmentation de la consommation immédiate de denrées alimentaires et amélioration des moyens de subsistance des personnes et ménages touchés par la sécheresse.",
+                duration: "15 Juin 2021 - 30 Novembre 2021",
+                financement: "DKH",
+                montant: "150.000 EUR",
+                region: "Androy",
+                district: "Ambovombe",
+                commune: "",
+                activites: [
+                    "Augmentation de la consommation immédiate de denrées alimentaires des personnes et les ménages touchés par la sécheresse (ventilé suivant le genre du chef de ménage) par un cash transfert",
+                    "Améliorations des moyens de subsistances des personnes et les ménages touchés par la sécheresse",
+                    "Montage et formation des groupes VLSA (Village Savings and Loan Associations)",
+                    "Comité de sélection et de conseil considérant l'aspect genre mise en place"
+                ]
+            },
+            {
+                title: "ACT RRF - Rapid Response Fund",
+                description: "Sauver la vie des ménages et des individus touchés par la sécheresse dans le district d'Ambovombe, région d'Androy, par le biais d'une intervention d'urgence.",
+                duration: "Octobre - Décembre 2021",
+                financement: "ACT Alliance",
+                montant: "60.000 EUR",
+                region: "Androy",
+                district: "Ambovombe",
+                commune: "",
+                activites: [
+                    "720 ménages reçoivent de l'argent liquide qui leur permettra de survivre et les aidera à être progressivement résilients",
+                    "250 femmes seront encouragées à défendre leurs droits humains et leur dignité"
+                ]
+            },
+            {
+                title: "Fondation La Cause",
+                description: "Contribuer à renforcer la résilience des populations du Grand Sud face à la sécheresse et à l'insécurité alimentaire chronique, en apportant une réponse immédiate à l'insécurité alimentaire et à la malnutrition, et en soutenant le relèvement précoce de la population.",
+                duration: "Janvier - Avril 2022",
+                financement: "Fondation La Cause",
+                montant: "20.008,79 EUR",
+                region: "Anosy",
+                district: "Amboasary",
+                commune: "",
+                activites: [
+                    "La distribution de chèvres et de moutons à destination des ménages vulnérables (140 ménages) afin que ces derniers puissent constituer un actif économique solide pour contrecarrer les effets de la sécheresse, et de les empêcher de procéder à des stratégies négatives comme la capitalisation",
+                    "Un suivi de la santé vétérinaire des moutons et/ou chèvres distribués en vue de pérenniser les actifs économiques dont disposent les ménages bénéficiaires",
+                    "Distribution des kits WASH (1.400 ménages) afin de permettre et de renforcer l'accès à l'eau potable et à l'hygiène des ménages vulnérables"
+                ]
+            },
+            {
+                title: "Mandriraifa",
+                description: "Le projet vise à renforcer la résilience face aux catastrophes et à améliorer le bien-être des communautés à Maroantsetra en mettant en place des mesures préventives, offrant une assistance d'urgence immédiate et encourageant des moyens de subsistance résistants aux aléas des désastres naturels et du changement climatique.",
+                duration: "Novembre 2023 - Novembre 2024",
+                financement: "DKH",
+                montant: "440.000 EUR",
+                region: "Ambatosoa",
+                district: "Maroantsetra",
+                commune: "Ambinanintelo, Antakotako, Ankofa, Mariarano, Sahasindro, Manambolo, Andranofotsy, Anjanazana, Maroantsetra",
+                activites: [
+                    "49 puits ont été désinfectés et 700 kits WASH ont été distribués",
+                    "Un programme de Cash for Work a bénéficié à 700 ménages",
+                    "Une assistance nutritionnelle a été apportée à 144 enfants souffrant de malnutrition aiguë modérée (MAM)",
+                    "Redynamisation et formation des 831 volontaires FJKM",
+                    "Elaboration PCP (Plan Communal de Prévention) et PAP (Plan d'Action de Prévention) et SIMEX avec les autorités locales",
+                    "5 FFS (Farmer Field School) mise en place et fonctionnel",
+                    "10 VSLA (Village Savings and Loan Associations) dont 233 membres"
+                ]
+            },
+            {
+                title: "CARD - Communauté Appuyée pour une Résilience Durable",
+                description: "Renforcer la résilience des communautés vulnérables aux effets des aléas climatiques et catastrophes naturelles, dans le District de Vangaindrano, à travers l'amélioration de leur sécurité alimentaire et leur préparation face aux risques de catastrophes. 300 ménages seront soutenus directement à travers une assistance humanitaire.",
+                duration: "Novembre 2023 - Novembre 2024",
+                financement: "SCCF",
+                montant: "163.190,74 EUR",
+                region: "Atsimo Antsinanana",
+                district: "Vangaindrano",
+                commune: "Sandravinany, Amparihy Est",
+                activites: [
+                    "300 ménages sont soutenus pour couvrir leur besoins essentiels pendant la période de soudure",
+                    "101 ménages sont formés en agroécologie, durables et résilientes",
+                    "82 ménages sont formés en formation des pêches modernes",
+                    "Mise en place des 134 comités de gestion de risque et catastrophe (CCGRC et ELS)",
+                    "Mise en place des 124 Micro-grants",
+                    "200 ménages agriculteurs et pêcheurs bénéficieront de soutien à leurs moyens de subsistance via des pratiques agroécologiques/de pêches, durables et résilientes",
+                    "Renforcement de la préparation des communautés, à faire face aux risques des aléas cyclones et inondations, à travers des activités de réduction des risques de catastrophes identifiées de façon participative"
+                ]
+            },
+            {
+                title: "Fagnanko",
+                description: "Renforcement des acteurs de changement au sein de la communauté et amélioration de la préparation aux catastrophes avec mise en œuvre d'actions anticipatives dans la région SAVA.",
+                duration: "Décembre 2024 - Novembre 2026",
+                financement: "DKH",
+                montant: "345.000 EUR",
+                region: "SAVA",
+                district: "Sambava, Antalaha",
+                commune: "Amboangibe, Nosoarina, Bemanevika, Tanambao Daoud, Farahalana, Antalaha, Ampahana, Ampohibe, Ambohitralalana",
+                activites: [
+                    "Renforcement des 30 acteurs de changements au sein de la communauté (activités agricoles, renforcement de l'égalité des sexes, engagement communautaire et leadership)",
+                    "Création de 30 groupes VSLA par l'éducation financière en tenant compte du genre et distribution des kits VSLA",
+                    "Renforcement des capacités des 200 volontaires en RRC pour améliorer la préparation aux catastrophes et la mise en œuvre d'actions anticipatives dans la région SAVA"
+                ]
+            },
+            {
+                title: "Maharina",
+                description: "Amélioration de la situation nutritionnelle, assistance humanitaire aux ménages vulnérables, mise en place de comités de gestion de risque et formation en agriculture intelligente dans le district de Vangaindrano.",
+                duration: "Décembre 2024 - Juillet 2025",
+                financement: "SCCF",
+                montant: "180.000 EUR",
+                region: "Atsimo Antsinanana",
+                district: "Vangaindrano",
+                commune: "Fenomabany, Amparihy-Est",
+                activites: [
+                    "Amélioration de la situation nutritionnelle de 180 femmes enceintes, allaitantes et de 250 enfants",
+                    "L'assistance humanitaire fournie au travers de l'ACT (Argent Contre Travail) à 500 ménages vulnérables de subvenir à leurs besoins essentiels",
+                    "Mise en place des 143 et redynamisation des comités des gestion de risque et des catastrophes (CCGRC et ELS)",
+                    "200 individus formés en Smart Agriculture (agriculture intelligente)"
+                ]
+            }
+        ];
+
+        let filteredProjects = [...projects];
+
+        function init() {
+            populateFilters();
+            renderProjects();
+            setupEventListeners();
+        }
+
+        function populateFilters() {
+            const regions = [...new Set(projects.map(p => p.region))].sort();
+            const regionFilter = document.getElementById('regionFilter');
+            regions.forEach(region => {
+                const option = document.createElement('option');
+                option.value = region;
+                option.textContent = region;
+                regionFilter.appendChild(option);
+            });
+
+            const years = [...new Set(projects.flatMap(p => {
+                const matches = p.duration.match(/\d{4}/g);
+                return matches || [];
+            }))].filter(y => y).sort().reverse();
+
+            const yearFilter = document.getElementById('yearFilter');
+            years.forEach(year => {
+                const option = document.createElement('option');
+                option.value = year;
+                option.textContent = year;
+                yearFilter.appendChild(option);
+            });
+        }
+
+        function setupEventListeners() {
+            document.getElementById('searchInput').addEventListener('input', filterProjects);
+            document.getElementById('regionFilter').addEventListener('change', filterProjects);
+            document.getElementById('yearFilter').addEventListener('change', filterProjects);
+        }
+
+        function filterProjects() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const regionFilter = document.getElementById('regionFilter').value;
+            const yearFilter = document.getElementById('yearFilter').value;
+
+            filteredProjects = projects.filter(project => {
+                const matchSearch = !searchTerm || 
+                    project.title.toLowerCase().includes(searchTerm) ||
+                    project.description.toLowerCase().includes(searchTerm) ||
+                    project.district.toLowerCase().includes(searchTerm) ||
+                    project.commune.toLowerCase().includes(searchTerm);
+
+                const matchRegion = !regionFilter || project.region === regionFilter;
+                const matchYear = !yearFilter || project.duration.includes(yearFilter);
+
+                return matchSearch && matchRegion && matchYear;
+            });
+
+            renderProjects();
+        }
+
+        function renderProjects() {
+            const grid = document.getElementById('projectsGrid');
+            const countElement = document.getElementById('projectsCount');
+            
+            countElement.textContent = filteredProjects.length;
+
+            if (filteredProjects.length === 0) {
+                grid.innerHTML = `
+                    <div class="no-results">
+                        <div class="no-results-icon">🔍</div>
+                        <div class="no-results-text">Aucun projet trouvé avec ces critères</div>
+                    </div>
+                `;
+                return;
+            }
+
+            grid.innerHTML = filteredProjects.map((project, index) => `
+                <div class="project-card" onclick="showProjectDetails(${projects.indexOf(project)})">
+                    <div class="project-header">
+                        <div class="project-number">Projet #${projects.indexOf(project) + 1}</div>
+                        <div class="project-title">${project.title}</div>
+                        <div class="project-duration">
+                            <span>📅</span> ${project.duration}
+                        </div>
+                    </div>
+                    <div class="project-body">
+                        <div class="project-description">${project.description}</div>
+                        
+                        <div class="project-meta">
+                            <div class="meta-item">
+                                <div class="meta-icon">📍</div>
+                                <div class="meta-content">
+                                    <div class="meta-label">Localisation</div>
+                                    <div class="meta-value">
+                                        <span class="tag">${project.region}</span>
+                                        <span class="tag">${project.district}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="meta-item">
+                                <div class="meta-icon">💰</div>
+                                <div class="meta-content">
+                                    <div class="meta-label">Financement</div>
+                                    <div class="meta-value">${project.financement}</div>
+                                </div>
+                            </div>
+                            
+                            <div class="meta-item">
+                                <div class="meta-icon">💵</div>
+                                <div class="meta-content">
+                                    <div class="meta-label">Budget</div>
+                                    <div class="meta-value">${project.montant}</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button class="btn-details">Voir tous les détails →</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function showProjectDetails(index) {
+            const project = projects[index];
+            const modal = document.getElementById('projectModal');
+            
+            document.getElementById('modalTitle').textContent = project.title;
+            document.getElementById('modalDuration').innerHTML = `<span>📅</span> ${project.duration}`;
+            
+            document.getElementById('modalBody').innerHTML = `
+                <div class="detail-section">
+                    <div class="section-title">
+                        <span class="section-icon">📋</span>
+                        Description du Projet
+                    </div>
+                    <p style="color: #555; line-height: 1.8; font-size: 1.1em;">${project.description}</p>
+                </div>
+
+                <div class="detail-section">
+                    <div class="section-title">
+                        <span class="section-icon">💼</span>
+                        Informations Financières & Partenariat
+                    </div>
+                    <div class="info-grid">
+                        <div class="info-box">
+                            <div class="info-label">Partenaire Financier</div>
+                            <div class="info-value">${project.financement}</div>
+                        </div>
+                        <div class="info-box">
+                            <div class="info-label">Budget Total</div>
+                            <div class="info-value">${project.montant}</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="detail-section">
+                    <div class="section-title">
+                        <span class="section-icon">🗺️</span>
+                        Zone d'Intervention
+                    </div>
+                    <div class="info-grid">
+                        <div class="info-box">
+                            <div class="info-label">Région</div>
+                            <div class="info-value">${project.region}</div>
+                        </div>
+                        <div class="info-box">
+                            <div class="info-label">District(s)</div>
+                            <div class="info-value">${project.district || 'Non spécifié'}</div>
+                        </div>
+                        ${project.commune ? `
+                        <div class="info-box">
+                            <div class="info-label">Commune(s)</div>
+                            <div class="info-value">${project.commune}</div>
+                        </div>
+                        ` : ''}
+                    </div>
+                </div>
+
+                <div class="detail-section">
+                    <div class="section-title">
+                        <span class="section-icon">✅</span>
+                        Activités Réalisées / Planifiées
+                    </div>
+                    <ul class="activities-list">
+                        ${project.activites.map(activite => `
+                            <li>
+                                <span class="activity-bullet">▸</span>
+                                <span class="activity-text">${activite}</span>
+                            </li>
+                        `).join('')}
+                    </ul>
+                </div>
+            `;
+            
+            modal.style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('projectModal').style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('projectModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        init();
+    </script>
+</body>
+</html>
